@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tạo Key Tool</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    label, select, input, button {
+      font-size: 16px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Tạo Key (Admin)</h2>
+
+  <label>Loại key:</label>
+  <select id="type">
+    <option value="thuong">Thường</option>
+    <option value="vip">VIP</option>
+  </select>
+
+  <label>Admin mật khẩu:</label>
+  <input type="password" id="password" placeholder="Nhập mật khẩu admin" />
+
+  <button onclick="createKey()">Tạo Key</button>
+  <p id="result"></p>
+
+  <script>
+    function generateRandomKey(length = 16) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    function createKey() {
+      const password = document.getElementById("password").value;
+      const type = document.getElementById("type").value;
+      const result = document.getElementById("result");
+
+      if (password !== "phungpham") {
+        result.textContent = "❌ Sai mật khẩu admin!";
+        return;
+      }
+
+      const key = generateRandomKey();
+      result.innerHTML = `✅ Key <b>${type.toUpperCase()}</b> được tạo: <span style="color: green">${key}</span>`;
+    }
+  </script>
+</body>
+</html>
